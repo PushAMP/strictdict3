@@ -117,6 +117,22 @@ def TimeValidator(data):
     raise ValidationError('Not a time [%s]' % data)
 
 
+def TimeStampValidator(data):
+    if isinstance(data, int):
+        try:
+            return dt.datetime.fromtimestamp(data)
+        except (ValueError, TypeError) as exc:
+            raise ValidationError('Not a timestamp [%s, %s]' % (data, exc,))
+    elif isinstance(data, str):
+        try:
+            return dt.datetime.fromtimestamp(int(data))
+        except (ValueError, TypeError) as exc:
+            raise ValidationError('Not a timestamp [%s, %s]' % (data, exc,))
+    elif isinstance(data, dt.datetime):
+        return data
+    raise ValidationError('Not a timestamp [%s]' % data)
+
+
 def parse_datetime(s):
     parts = s.split('T')
     if len(parts) == 2:

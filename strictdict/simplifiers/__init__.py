@@ -81,3 +81,24 @@ class TimeSimplifier(object):
         except ValueError:
             data = dt.datetime.strptime(data_str, '%H:%M:%S').time()
             return data
+
+
+class TimeStampSimplifier(object):
+    @staticmethod
+    def serialize(data):
+        return int(data.strftime("%s"))
+
+    @classmethod
+    def deserialize(cls, data_str):
+        if isinstance(data_str, int):
+            data = dt.datetime.fromtimestamp(data_str)
+            return data
+        if data_str.isalnum():
+            data = dt.datetime.fromtimestamp(int(data_str))
+            return data
+        try:
+            data = dt.datetime.strptime(data_str, '%Y-%m-%dT%H:%M:%S')
+            return data
+        except ValueError:
+            data = dt.datetime.strptime(data_str, '%Y-%m-%dT%H:%M:%SZ')
+            return data

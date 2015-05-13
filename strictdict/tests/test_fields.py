@@ -48,3 +48,15 @@ def test_date_with_z():
 
     result = ff.deserialize("2013-11-18T00:00:00Z")
     assert result == dt.datetime(2013, 11, 18)
+
+
+def test_timestamp():
+    ff = f.TimeStamp()
+    now = dt.datetime.now().replace(microsecond=0)
+    result = ff._validate(now.strftime('%s'))
+    assert result == now
+    now_str = now.strftime('%Y-%m-%dT%H:%M:%S')
+    result = ff.deserialize(now_str)
+    assert result == now
+    result = ff.deserialize(now.strftime('%s'))
+    assert result == now

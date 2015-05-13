@@ -177,3 +177,8 @@ class DateTime(Field):
 class Time(Field):
     validator = staticmethod(TimeValidator)
     simplifier = staticmethod(TimeSimplifier)
+
+
+class TimeStamp(Field):
+    validator = staticmethod(TimeStampValidator)
+    simplifier = staticmethod(TimeStampSimplifier)
