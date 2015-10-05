@@ -1,3 +1,3 @@
 # README #
 
-[![Build Status](https://drone.io/bitbucket.org/260development/strictdict3/status.png)](https://drone.io/bitbucket.org/260development/strictdict3/latest)
+[![Build Status](https://travis-ci.org/PushAMP/strictdict3.svg)](https://travis-ci.org/PushAMP/strictdict3)
