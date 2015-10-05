@@ -19,7 +19,7 @@ setup(
     ],
     platforms='any',
     license='MIT',
-    url='https://bitbucket.org/3f17/strictdict3',
+    url='https://github.com/PushAMP/strictdict3',
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
