@@ -222,7 +222,10 @@ class StrictDict(_StrictDictInterface, metaclass=StrictDictMeta):
     @classmethod
     def loads(cls, data_str, msg_pack=False):
         if msg_pack:
-            data = msgpack.loads(data_str)
+            if isinstance(data_str, bytes):
+                data = msgpack.loads(data_str, encoding='utf-8')
+            else:
+                data = msgpack.loads(data_str)
         else:
             data = json.loads(data_str)
 

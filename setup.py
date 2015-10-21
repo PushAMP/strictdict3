@@ -28,7 +28,7 @@ pkgs = find_packages()
 
 setup(
     name='strictdict3',
-    version='0.4.2',
+    version='0.4.3',
     description='Strict Dict',
     author='Dmitry Zhiltsov',
     author_email='dzhiltsov@me.com',
