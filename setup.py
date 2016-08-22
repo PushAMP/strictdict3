@@ -28,18 +28,18 @@ pkgs = find_packages()
 
 setup(
     name='strictdict3',
-    version='0.4.4',
+    version='0.4.5',
     description='Strict Dict',
     author='Dmitry Zhiltsov',
     author_email='dzhiltsov@me.com',
     ext_modules=[],
     packages=pkgs,
-    tests_require=['pytest'],
+    tests_require=['pytest==3.0.0'],
     cmdclass={'test': PyTest},
     scripts=[],
     data_files=[],
     install_requires=[
-        'msgpack-python',
+        'msgpack-python==0.4.8',
     ],
     test_suite="strictdict.tests",
     platforms='any',
