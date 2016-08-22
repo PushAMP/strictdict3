@@ -84,21 +84,25 @@ class TimeSimplifier(object):
 
 
 class TimeStampSimplifier(object):
+    DATE_FORMATS = ['%Y-%m-%dT%H:%M:%S', '%Y-%m-%dT%H:%M:%S.%f',
+                    '%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%dT%H:%M:%S.%fZ']
+
     @staticmethod
     def serialize(data):
-        return int(data.strftime("%s"))
+        return data.timestamp()
 
     @classmethod
     def deserialize(cls, data_str):
-        if isinstance(data_str, int):
+        if isinstance(data_str, (int, float)):
             data = dt.datetime.fromtimestamp(data_str)
             return data
         if data_str.isalnum():
             data = dt.datetime.fromtimestamp(int(data_str))
             return data
-        try:
-            data = dt.datetime.strptime(data_str, '%Y-%m-%dT%H:%M:%S')
-            return data
-        except ValueError:
-            data = dt.datetime.strptime(data_str, '%Y-%m-%dT%H:%M:%SZ')
-            return data
+        for format in cls.DATE_FORMATS:
+            try:
+                data = dt.datetime.strptime(data_str, format)
+                return data
+            except ValueError:
+                pass
+        raise ValueError

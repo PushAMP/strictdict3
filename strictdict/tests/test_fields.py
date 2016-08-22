@@ -52,11 +52,16 @@ def test_date_with_z():
 
 def test_timestamp():
     ff = f.TimeStamp()
-    now = dt.datetime.now().replace(microsecond=0)
-    result = ff._validate(now.strftime('%s'))
+    now = dt.datetime.now()
+    result = ff._validate(now.timestamp())
+    assert result == now
+    result = ff._validate(int(now.timestamp()))
+    assert result == now.replace(microsecond=0)
+    now_str = now.strftime('%Y-%m-%dT%H:%M:%S.%f')
+    result = ff.deserialize(now_str)
     assert result == now
     now_str = now.strftime('%Y-%m-%dT%H:%M:%S')
     result = ff.deserialize(now_str)
-    assert result == now
-    result = ff.deserialize(now.strftime('%s'))
+    assert result == now.replace(microsecond=0)
+    result = ff.deserialize(now.timestamp())
     assert result == now

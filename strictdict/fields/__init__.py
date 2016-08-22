@@ -51,9 +51,11 @@ class Field(object):
         if serialized is None:
             return self.empty_value()
         if self.is_list:
-            return tuple(self.simplifier.deserialize(item) for item in serialized)
+            return tuple(
+                self.simplifier.deserialize(item) for item in serialized)
         if self.is_set:
-            return frozenset(self.simplifier.deserialize(item) for item in serialized)
+            return frozenset(
+                self.simplifier.deserialize(item) for item in serialized)
         return self.simplifier.deserialize(serialized)
 
     def is_empty(self, value):
@@ -87,7 +89,8 @@ class Bool(FieldAsIs):
                 return False
             if data.lower() in ('true', '1'):
                 return True
-        raise ValidationError("Only ints, booleans and strings 'False'' and 'True' are accepted")
+        raise ValidationError(
+            "Only ints, booleans and strings 'False'' and 'True' are accepted")
 
 
 class Int(FieldAsIs):

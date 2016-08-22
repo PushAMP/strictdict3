@@ -7,7 +7,8 @@ import decimal
 
 class ValidationError(Exception):
 
-    def __init__(self, message, class_=None, path=None, value=None, errors=None, *args, **kwargs):
+    def __init__(self, message, class_=None, path=None, value=None,
+                 errors=None, *args, **kwargs):
         if errors is None:
             errors = []
         self.errors = errors
@@ -21,7 +22,7 @@ class ValidationError(Exception):
         clsname = self.class_.__name__ if self.class_ else '<No class>'
         path_display = ".".join([str(clsname)] + list(reversed(self.path)))
         return "Failed to validate {0} as {1}: {2}".format(
-                self.value, path_display, self.message)
+            self.value, path_display, self.message)
 
 
 def DummyValidator(data):
@@ -71,14 +72,15 @@ def DecimalValidator(data):
     if isinstance(data, float):
         data = str(data)
     return SimpleTypeValidator(
-            decimal.Decimal, [decimal.InvalidOperation, ValueError])(data)
+        decimal.Decimal, [decimal.InvalidOperation, ValueError])(data)
 
 
 def CurrencyValidator(data):
     if not isinstance(data, str):
         raise ValidationError('Not a string')
     if len(data) != 3:
-        raise ValidationError('Currency can contain two letters only [%s]' % data)
+        raise ValidationError(
+            'Currency can contain two letters only [%s]' % data)
     return str(data)
 
 
@@ -118,14 +120,14 @@ def TimeValidator(data):
 
 
 def TimeStampValidator(data):
-    if isinstance(data, int):
+    if isinstance(data, (int, float)):
         try:
             return dt.datetime.fromtimestamp(data)
         except (ValueError, TypeError) as exc:
             raise ValidationError('Not a timestamp [%s, %s]' % (data, exc,))
     elif isinstance(data, str):
         try:
-            return dt.datetime.fromtimestamp(int(data))
+            return dt.datetime.fromtimestamp(float(data))
         except (ValueError, TypeError) as exc:
             raise ValidationError('Not a timestamp [%s, %s]' % (data, exc,))
     elif isinstance(data, dt.datetime):
