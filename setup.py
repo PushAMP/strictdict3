@@ -34,7 +34,7 @@ setup(
     author_email='dzhiltsov@me.com',
     ext_modules=[],
     packages=pkgs,
-    tests_require=['pytest==3.0.0'],
+    tests_require=['py==1.4.31', 'pytest==3.0.0'],
     cmdclass={'test': PyTest},
     scripts=[],
     data_files=[],
