@@ -5,5 +5,14 @@ install:
 - python setup.py develop
 - pip install pep8==1.7.0
 script:
-  - pep8 .
-  - python setup.py test
+- pep8 .
+- python setup.py test
+deploy:
+  provider: pypi
+  user: dzhiltsov
+  password:
+    secure: Ar16Oym31b2uyxLah5GUBjfy/w+kWGOWkTi+l1ZraIBWxVQDsFMZfx2k84f2/gPq6Q4AGftwhsbsHrNq9HuYRoa4fdLjbck2SgGuQ1jaZtWJHPlf6A3AnAwvC3SzWMnNsCvCiLZCAPJCCWAK0wdZ+JguGIX4IRiF+I/YXTy+tIYDocgdW42NRIO0/78ALLqWXy2NHSMk62jUtGy8Rt4w4Ie1j2NiMeXZlKt5x0vTjFsTUojgVWhZYTk9WcFXodHuMFq1iBBVgfUQFcvvkHE+AXMs1TaFepKpwiACBJrf9AZ52MpuuqCPYDAWDh5pU/xMueAeITKjA23sJi4iX4q0me9ruRdK+b+V98cWFM2rWRVIYnU2TRX2dTGwKulNCYCl6OBKxgJgUuT7hLFKX3nolc+LLIQseD6Pm6XxM5ommndfGZRZBb1NYnIz3r7NOIXeVgWE618uy51fJAf5LOtAxPKMCE3eOtYQ1cfxBTEGU4N+ik8zfLDgcetE/umbUWkY4eav6LgjfRSlEJmBcfsgqyLGTVh66lW1VlnczOn9sGA/h4N7ZzxWRrSoh5cbpI0DqleNzynZqaCiIMbTM8+Giauyi+SP/+ZClyg+Dr+NhC8qUpySulXnfxjpfZamQquWNZhdgBYVnIALksJFPvk9OC8bBqWBo1cPL4S6uYBP0LM=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: PushAMP/strictdict3
